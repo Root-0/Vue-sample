@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue Sample</title>
+    <link rel="stylesheet" href="css/main.css" type="text/css">
+    <link rel="stylesheet" href="css/fa/all.min.css">
+  </head>
+  <body>
+    <div class="container-fluid" id="app">
+      <div class="container text-center">
+        <h2 class="">Vue js Sample Application</h2>
+        <p class="">Using Vue with script tag.</p>
+
+        <div class="container box col-md-8">
+          
+          <div class="toolbar">
+            <a href="javascript:void(0);" 
+              class="btn btn-dark"
+              v-on:click="cars_display=false, form_show=true"
+              ><span class="far fa-eye-slash"></span> Hide cars</a>
+            <a href="javascript:void(0);" 
+              class="btn btn-dark"
+              v-on:click="cars_display=true, form_show=false"
+              ><span class="far fa-eye"></span> Show cars</a>
+          </div>
+          
+          <div v-show='cars_display' class="card" v-for="product in products">
+            <div class="imagebox">
+              <img :src=product.image class="img-fluid">
+            </div>
+            
+            <div class="details">
+              <h4 class="">
+                  {{product.name}}
+              </h4>
+              <ul class="">
+                <li class="">
+                  Price :<span class="">{{product.price}}</span>
+                </li>
+                <li class="">
+                  0-100Km :<span>{{product.speed}}</span>
+                </li>
+                <li class="">
+                  Stock: <span v-if='product.stock' class="green">Available</span>
+                  <span v-else class="red">Not Available</span>
+                </li>
+              </ul>
+              <br>
+              <a href="javascript:void(0);" 
+                class="btn btn-buy"
+                v-on:click="cars_display=false, form_show=true">Book now</a>
+            </div>
+
+          </div>
+
+          <div class="card form-card" v-show="form_show">
+            <a href="javascript:void(0);"
+              class="btn btn-dark"
+              v-on:click="cars_display=true, form_show=false">
+                <span class="fas fa-angle-double-left"> </span> Return</a>
+            
+            <form action="" method="post" @submit.prevent='formsubmit'>
+              <input type="text" name="name" id="name" 
+                placeholder="Enter name" class="form-control"
+                v-model='form.name'>
+                <p class="red" v-if="!namecheck">Enter name</p>
+              <input type="email" name="email" id="mail" 
+                placeholder="Enter email" class="form-control"
+                v-model='form.email'>
+                <p class="red" v-if="!mailcheck">Enter Email</p>
+              <input type="text" name="mobile" id="mobile" 
+                placeholder="Enter mobile number" class="form-control"
+                v-model.number='form.mobile'>
+                <p class="red" v-if="!mobilecheck">Required 10 digit number</p>
+
+              <button type="submit" class="btn btn-submit">
+                <span class="fa fa-paper-plane"></span> Submit
+              </button>
+              
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>      
+
+    <script src="js/vue-dev.js"></script>
+  </body>
+</html>
+
+<script>
+  const app = new Vue({
+    el:'#app',
+    data: {
+      products: {
+        speedster : {
+          name: 'Porsche 911 speedster',
+          price: '$75000',
+          speed: '3.5 seconds',
+          image: 'img/911 speedster.jpg',
+          stock: 'true'
+        },
+        carrera: {
+          name: 'Porsche Carrera 4s',
+          price: '$45000',
+          speed: '6.5 seconds',
+          image: 'img/carrera 4s.jpg',
+          stock: false
+        },
+        cayene: {
+          name: 'Porsche Cayene',
+          price: '$55000',
+          speed: '5.5 seconds',
+          image: 'img/cayene.jpg',
+          stock: true
+        }
+      },
+      cars_display: false,
+      form_show: true,
+      form: {
+        name: null,
+        email: null,
+        mobile: null
+      }
+    },
+    methods: {
+      formsubmit(){
+        const namecheck = !!this.form.name;
+        const mailcheck = !!this.form.email;
+        const mobilecheck = typeof this.form.mobile === 'number';
+
+        const validform = namecheck && mailcheck && mobilecheck;
+        if(validform){
+          console.log('form submitted: ', this.form);
+          console.log('Fields: ', this.form.name, this.form.email, this.form.mobile);
+        }
+        else{
+          console.log('invalid form: ', namecheck, mailcheck, mobilecheck);
+          console.log('length: ',this.form.mobile.length);
+        }
+        
+      }
+    }
+  })
+</script>

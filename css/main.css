@@ -1,0 +1,202 @@
+body {
+  font-size: 16px;
+  word-wrap: break-word;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  background-color: whitesmoke;
+  padding: 0%;
+  margin: 0%;
+  font-family: akrobat;
+  color: #333;
+}
+
+.container {
+  padding: 15px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.container-fluid {
+  margin-left: 0px;
+  margin-right: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  background: slategrey;
+}
+
+.col-md-8 {
+  width: 66.66%;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a {
+  text-decoration: none;
+  color: dodgerblue;
+}
+
+a:hover {
+  color: cyan;
+}
+
+.box {
+  margin: 3rem auto;
+  border-radius: 10px;
+}
+
+.card {
+  background: white;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 30px 20px;
+  -webkit-box-shadow: 10px 10px 10px #555;
+          box-shadow: 10px 10px 10px #555;
+  margin: 30px 0px;
+  border-radius: 10px;
+  min-height: 300px;
+}
+
+.imagebox {
+  width: 500px;
+  height: 150px;
+}
+
+.img-fluid {
+  width: 100%;
+  height: auto;
+}
+
+.details {
+  padding: 0px 20px;
+  text-align: left;
+  font-size: 18px;
+  color: dodgerblue;
+}
+
+.details h4 {
+  font-size: 24px;
+  margin: 10px 0px;
+}
+
+.details ul {
+  padding: 0px;
+  list-style: none;
+}
+
+.details ul li {
+  color: #333;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px 0px;
+}
+
+.details ul li span {
+  margin: 0px 10px;
+  color: dodgerblue;
+}
+
+.green {
+  background-color: green !important;
+  color: white  !important;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.red {
+  background-color: red !important;
+  color: white  !important;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button {
+  font-size: 18px;
+  border: none;
+}
+
+.btn {
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.btn:hover {
+  font-weight: bold;
+}
+
+.btn-buy {
+  background: indigo;
+  color: white;
+}
+
+.btn-buy:hover {
+  background: white;
+  color: indigo;
+  border: 2px solid indigo;
+}
+
+.btn-submit {
+  background: green;
+  color: white;
+}
+
+.btn-submit:hover {
+  background: white;
+  color: green;
+  border: 1px solid green;
+  -webkit-box-shadow: 5px 5px 10px #bbb;
+          box-shadow: 5px 5px 10px #bbb;
+}
+
+.btn-dark {
+  background: #333;
+  color: white;
+}
+
+.btn-dark:hover {
+  background: white;
+  color: #333;
+  border: 2px solid #333;
+}
+
+.toolbar {
+  text-align: left;
+}
+
+.toolbar .btn {
+  margin: 10px 20px;
+}
+
+.form-card {
+  display: block;
+  text-align: left;
+}
+
+form {
+  margin: 20px 0px;
+  border: 1px solid black;
+  display: block;
+}
+
+form button {
+  margin: 20px 10px;
+}
+
+form .form-control {
+  width: 90%;
+  font-size: 18px;
+  line-height: 24px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #333;
+  margin: 20px 10px;
+}
+
+form .form-control:focus {
+  border-color: dodgerblue;
+}
+/*# sourceMappingURL=main.css.map */
