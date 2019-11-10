@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+
 <html lang="en">
   <head>
     <meta charset="UTF-8">
@@ -66,11 +66,13 @@
               <input type="text" name="name" id="name" 
                 placeholder="Enter name" class="form-control"
                 v-model='form.name'>
-                <p class="red" v-if="!namecheck">Enter name</p>
+                <p class="red" v-if="!namecheck"> <span class="fas fa-exclamation-circle"></span> Enter name</p>
+              
               <input type="email" name="email" id="mail" 
                 placeholder="Enter email" class="form-control"
                 v-model='form.email'>
-                <p class="red" v-if="!mailcheck">Enter Email</p>
+                <p class="red" v-if="!mailcheck"> <span class="fas fa-exclamation-triangle"></span> Enter Email</p>
+              
               <input type="text" name="mobile" id="mobile" 
                 placeholder="Enter mobile number" class="form-control"
                 v-model.number='form.mobile'>
@@ -78,6 +80,10 @@
 
               <button type="submit" class="btn btn-submit">
                 <span class="fa fa-paper-plane"></span> Submit
+              </button>
+
+              <button type="reset" class="btn btn-dark">
+                <span class="fas fa-times"></span> Reset
               </button>
               
             </form>
@@ -127,20 +133,31 @@
     },
     methods: {
       formsubmit(){
-        const namecheck = !!this.form.name;
-        const mailcheck = !!this.form.email;
-        const mobilecheck = typeof this.form.mobile === 'number';
-
-        const validform = namecheck && mailcheck && mobilecheck;
-        if(validform){
+        if(this.validform){
           console.log('form submitted: ', this.form);
           console.log('Fields: ', this.form.name, this.form.email, this.form.mobile);
         }
         else{
-          console.log('invalid form: ', namecheck, mailcheck, mobilecheck);
-          console.log('length: ',this.form.mobile.length);
+          console.log('invalid form: ', this.namecheck, this.mailcheck, this.mobilecheck);
+          if(this.form.mobile != null){
+            console.log('length: ',this.form.mobile.length);
+          }
         }
         
+      }
+    },
+    computed: {
+      namecheck(){
+        return !!this.form.name;
+      },
+      mailcheck(){
+        return !!this.form.email;
+      },
+      mobilecheck(){
+        return typeof this.form.mobile === 'number';
+      },
+      validform(){
+        return  this.namecheck && this.mailcheck && this.mobilecheck;
       }
     }
   })
