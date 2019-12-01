@@ -16,12 +16,64 @@ a {
 }
 
 a:hover {
-  color: cyan;
+  color: #2b8585;
 }
 
 .box {
   margin: 3rem auto;
   border-radius: 10px;
+}
+
+h1, h2, h3, h4 {
+  font-family: ubuntu;
+}
+
+#size, #qty {
+  width: 75px;
+  padding: 5px;
+}
+
+.colors .dots {
+  padding: 0px;
+  margin-left: 0px;
+  margin-right: 5px;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  border: 3px solid #ddd;
+}
+
+.colors .dots:hover {
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+  -webkit-transform: scale(1.35);
+          transform: scale(1.35);
+}
+
+.colors .dots.selected {
+  -webkit-transform: scale(1.35);
+          transform: scale(1.35);
+  border-color: #bbb;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+.black {
+  background: black;
+}
+
+.white {
+  background: whitesmoke;
+}
+
+.indigo {
+  background: indigo;
 }
 
 .green {

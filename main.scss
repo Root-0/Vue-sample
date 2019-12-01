@@ -1,4 +1,4 @@
-$light : cyan;
+$light : rgb(43, 133, 133);
 $dark : #333;
 $wite: whitesmoke;
 
@@ -27,7 +27,51 @@ a{
 }
 
 // =========== Product Card =============
+h1, h2, h3, h4 {
+    font-family: ubuntu;
+}
 
+
+#size, #qty{
+    width: 75px;
+    padding: 5px;
+}
+
+.colors .dots{
+    padding: 0px;
+    margin-left: 0px;
+    margin-right: 5px;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    border: 3px solid #ddd;
+
+    &:hover{
+        transition: 0.25s;
+        transform: scale(1.35);
+    }
+}
+.colors .dots.selected{
+    // border-width: 5px;
+    transform: scale(1.35);
+    border-color: #bbb;
+}
+
+.red{
+    background: red;
+}
+.blue{
+    background: blue;
+}
+.black{
+    background: black;
+}
+.white{
+    background: whitesmoke;
+}
+.indigo{
+    background: indigo;
+}
 
 
 // ------------ Success / Fail --------------

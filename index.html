@@ -11,157 +11,194 @@
   </head>
   <body>
     <div class="container-fluid" id="app">
-      <div class="container text-center">
-        <h2 class="">Vue js Sample Application</h2>
-        <p class="">Using Vue with script tag.</p>
-
-        <div class="container box col-md-8">
-          
-          <div class="toolbar">
-            <a href="javascript:void(0);" 
-              class="btn btn-dark"
-              v-on:click="cars_display=false, form_show=true"
-              ><span class="far fa-eye-slash"></span> Hide cars</a>
-            <a href="javascript:void(0);" 
-              class="btn btn-dark"
-              v-on:click="cars_display=true, form_show=false"
-              ><span class="far fa-eye"></span> Show cars</a>
+      <div class="container p-3">
+        <h2 class="text-center">Vue js Sample Application</h2>
+        <p class="text-center">Using Vue with script tag.</p>
+        <div class="card my-3 px-5 py-3">
+          <div class="toplinks offset-8 d-flex mb-4">
+              <div class="cartitem ml-auto">
+                <button class="btn btn-outline-danger">
+                  <span class="fas fa-heart"></span>
+                  <span class="mx-2">Your Wishlist ({{wishlist}})</span>
+                </button>
+              </div>
+              <div class="cartitem ml-auto mr-0">
+                <button class="btn btn-info">
+                  <span class="fas fa-cart-arrow-down"></span>
+                  <span class="mx-2 font-weight-bold">Your Cart ({{cart}})</span>
+                </button>
+              </div>
           </div>
-          
-          <div v-show='cars_display' class="card" v-for="product in products">
-            <div class="imagebox">
-              <img :src=product.image class="img-fluid">
+          <!-- end toplinks -->
+          <div class="row">
+            <div class="image-box col-sm-6">
+              <img :src="products.image" alt="" class="img-fluid">
             </div>
-            
-            <div class="details">
-              <h4 class="">
-                  {{product.name}}
-              </h4>
-              <ul class="">
-                <li class="">
-                  Price :<span class="">{{product.price}}</span>
-                </li>
-                <li class="">
-                  0-100Km :<span>{{product.speed}}</span>
-                </li>
-                <li class="">
-                  Stock: <span v-if='product.stock' class="green">Available</span>
-                  <span v-else class="red">Not Available</span>
-                </li>
-              </ul>
-              <br>
-              <a href="javascript:void(0);" 
-                class="btn btn-buy"
-                v-on:click="cars_display=false, form_show=true">Book now</a>
+  
+            <div class="info bg-light col-sm-6 py-3">
+              <div class="info-row row">
+                <div class="col-10">
+                    <h3 class="px-3">T-Shirt {{products.color}}</h3>
+                    <h5 class="px-3 text-muted">By <a href="#" class="">{{products.brand}}</a></h5>
+                </div>
+                <div class="col-2">
+                  <h4 class="p-2">
+                      <a href="javascript:void(0);" class="btn-wishlist" @click='addwish'>
+                        <span class="fa-heart text-danger" v-bind:class="[{'fas' : products.wish},{'far' : !products.wish} ]"></span>
+                      </a>
+                  </h4>
+                </div>
+              </div>
+  
+              <div class="about bg-light p-3">
+                <h5 class="">About the product</h5>
+                <p class="product-about">T-shirt by {{products.brand}}. Great fabric, great fit, comes in 4 colors and 3 sizes.</p>
+              </div>
+  
+              <div class="priceinfo row px-3">
+                <div class="col-sm-6 price px-3 mb-3">
+                  <p class="mb-0">Price</p>
+                  <h3 class="">
+                    <span class="text-muted small fas fa-rupee-sign"></span>
+                    <span class="font-weight-bold text-success"> {{products.price}}</span>
+                  </h3>
+                </div>
+                <div class="col-sm-6 stock px-3 mb-3">
+                  <p class="mb-2">Stock</p>
+                  <h5 class="">
+                    <span class="text-danger" v-if="products.stock < 5 && products.stock > 0">Only {{products.stock}} left</span>
+                    <span class="text-black-50" v-if="products.stock == 0">Out of stock</span>
+                    <span class="text-success" v-if="products.stock > 4">In stock {{products.stock}}</span>
+                    
+                  </h5>
+                </div>
+              </div>
+
+              <div class="selects px-3 row">
+                <div class="col-4">
+                  <p class="mb-1">Size</p>
+                  <select name="size" id="size">
+                    <option value="small">S</option>
+                    <option value="medium">M</option>
+                    <option value="large">L</option>
+                  </select>
+                </div>
+                <div class="col-4">
+                  <p class="mb-1">Quantity</p>
+                  <select name="qty" id="qty">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+              <!-- end selects -->
+              <div class="colors px-3 my-3">
+                <p class="mb-1">Colors</p>
+                <ul class="list-inline">
+                  <li class="list-inline-item dots" v-for="type in products.types" :key="type.color"
+                       v-bind:class="type.color" @click="updateProduct(type)">
+                    <a href="" class=""></a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="cart mt-5">
+                <a href="javascript:void(0);" class="btn btn-lg btn-secondary btn-block"
+                   v-bind:class="[{'disabled' : products.stock == 0}, {'btn-success': products.stock}]"  @click='addcart'>
+                  <span class="fa fa-cart-plus"></span>
+                  <span class="mx-2">Add to Cart</span>
+                </a>
+              </div>
             </div>
-
+            <!-- end info -->
           </div>
-
-          <div class="card form-card" v-show="form_show">
-            <a href="javascript:void(0);"
-              class="btn btn-dark"
-              v-on:click="cars_display=true, form_show=false">
-                <span class="fas fa-angle-double-left"> </span> Return</a>
-            
-            <form action="" method="post" @submit.prevent='formsubmit'>
-              <input type="text" name="name" id="name" 
-                placeholder="Enter name" class="form-control"
-                v-model='form.name'>
-                <p class="red" v-if="!namecheck"> <span class="fas fa-exclamation-circle"></span> Enter name</p>
-              
-              <input type="email" name="email" id="mail" 
-                placeholder="Enter email" class="form-control"
-                v-model='form.email'>
-                <p class="red" v-if="!mailcheck"> <span class="fas fa-exclamation-triangle"></span> Enter Email</p>
-              
-              <input type="text" name="mobile" id="mobile" 
-                placeholder="Enter mobile number" class="form-control"
-                v-model.number='form.mobile'>
-                <p class="red" v-if="!mobilecheck">Required 10 digit number</p>
-
-              <button type="submit" class="btn btn-submit">
-                <span class="fa fa-paper-plane"></span> Submit
-              </button>
-
-              <button type="reset" class="btn btn-dark">
-                <span class="fas fa-times"></span> Reset
-              </button>
-              
-            </form>
-          </div>
+          <!-- end row inside card -->
         </div>
+        <!-- end card -->
       </div>
+      <!-- end container -->
     </div>      
 
     <script src="js/vue-dev.js"></script>
-    <script src="js/vuelidate.min.js"></script>
-    <script src="js/validators.min.js"></script>
+    <!-- <script src="js/vuelidate.min.js"></script> -->
+    <!-- <script src="js/validators.min.js"></script> -->
   </body>
 </html>
 
 <script>
-  Vue.use(vuelidate.default);
   const app = new Vue({
     el:'#app',
     data: {
       products: {
-        speedster : {
-          name: 'Porsche 911 speedster',
-          price: '$75000',
-          speed: '3.5 seconds',
-          image: 'img/911 speedster.jpg',
-          stock: 'true'
-        },
-        carrera: {
-          name: 'Porsche Carrera 4s',
-          price: '$45000',
-          speed: '6.5 seconds',
-          image: 'img/carrera 4s.jpg',
-          stock: false
-        },
-        cayene: {
-          name: 'Porsche Cayene',
-          price: '$55000',
-          speed: '5.5 seconds',
-          image: 'img/cayene.jpg',
-          stock: true
-        }
+        color: 'Red',
+        price: '1200',
+        brand: 'Nike',
+        image: 'img/red.jpg',
+        wish: false,
+        stock: 12,
+        types: [
+          {
+            color: 'Red',
+            price: '1200',
+            brand: 'Nike',
+            image: 'img/red.jpg',
+            wish: true,
+            stock: 12
+          },
+          {
+            color: 'Black',
+            price: '600',
+            brand: 'Puma',
+            image: 'img/black.jpg',
+            wish: false,
+            stock: 2
+          },
+          {
+            color: 'Blue',
+            price: '900',
+            brand: 'Adidas',
+            image: 'img/blue.jpg',
+            wish: false,
+            stock: 4
+          },
+          {
+            color: 'Indigo',
+            price: '1000',
+            brand: 'Reebok',
+            image: 'img/indigo.jpg',
+            wish: true,
+            stock: 0
+          },
+          {
+            color: 'White',
+            price: '400',
+            brand: 'Thrift Shop',
+            image: 'img/white.jpg',
+            wish: false,
+            stock: 5
+          }
+        ]
       },
-      cars_display: false,
-      form_show: true,
-      form: {
-        name: null,
-        email: null,
-        mobile: null
-      }
+      cart : 0,
+      wishlist: 0
     },
     methods: {
-      formsubmit(){
-        if(this.validform){
-          console.log('form submitted: ', this.form);
-          console.log('Fields: ', this.form.name, this.form.email, this.form.mobile);
-        }
-        else{
-          console.log('invalid form: ', this.namecheck, this.mailcheck, this.mobilecheck);
-          if(this.form.mobile != null){
-            console.log('length: ',this.form.mobile.length);
-          }
-        }
-        
-      }
-    },
-    computed: {
-      namecheck(){
-        return !!this.form.name;
+      addcart : function(){
+        this.cart += 1;
       },
-      mailcheck(){
-        return !!this.form.email;
+      addwish : function(){
+        this.wishlist += 1;
       },
-      mobilecheck(){
-        return typeof this.form.mobile === 'number';
-      },
-      validform(){
-        return  this.namecheck && this.mailcheck && this.mobilecheck;
+      updateProduct : function(type){
+        this.products.color = type.color;
+        this.products.price = type.price;
+        this.products.brand = type.brand;
+        this.products.image = type.image;
+        this.products.stock = type.stock;
+        this.products.wish = type.wish;
       }
     }
   })
