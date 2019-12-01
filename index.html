@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Vue Sample</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/main.css" type="text/css">
     <link rel="stylesheet" href="css/fa/all.min.css">
   </head>
@@ -93,10 +94,13 @@
     </div>      
 
     <script src="js/vue-dev.js"></script>
+    <script src="js/vuelidate.min.js"></script>
+    <script src="js/validators.min.js"></script>
   </body>
 </html>
 
 <script>
+  Vue.use(vuelidate.default);
   const app = new Vue({
     el:'#app',
     data: {
